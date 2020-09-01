@@ -1,4 +1,4 @@
-# zoho-workdrive-api
+# zoho-wd-pools
 
 ![onix](https://img.shields.io/badge/onix-systems-blue.svg)
 
@@ -8,7 +8,7 @@ auto set tokens mechanism
 # Install
 
 ```sh
-npm i zoho-workdrive-api
+npm i zoho-wd-pools
 ```
 
 # API
@@ -63,7 +63,13 @@ npm i zoho-workdrive-api
 
 -   [url](#url-1)
 
--   share will be added soon
+-   [share](#share-1)
+
+    -   [list](#sharelist)
+    -   [create](#sharecreate)
+    -   [createDownLoad](#sharecreateDownLoad)
+    -   [update](#shareupdate)
+    -   [delete](#sharedelete)
 
 # Examples
 
@@ -865,5 +871,142 @@ zWDApi
     .then(data => {
         // console.log(data)
         // returns data with result object
+    });
+```
+
+## share
+
+### share.createShare
+
+_Create Share Link_
+
+**Returns**: <code>Object</code> - new Share Link object
+
+| Param                            | Type                  | Description                             | Required |
+| -------------------------------- | --------------------- | --------------------------------------- | -------- |
+| pool                             | <code>string</code>   | name of the pool you would like, of use | true     |
+| params                           | <code>Object</code>   |                                         |          |
+| params.resourceId                | <code>String</code>   | Id of the file                          | true     |
+| params.name                      | <code>String</code>   | Name of new link                        | true     |
+| params.allowDownload             | <code>Boolean</code>  | download Possible                       | true     |
+| params.role                      | <code>String</code>   | role                                    | true     |
+| params.requestUserData           | <code>Boolean</code>  | Request User Data                       | false    |
+| params.password                  | <code>String</code>   | password                                | false    |
+| params.expiredDate               | <code>String</code>   | Expired date                            | false    |
+| params.inputFields               | <code>String[]</code> | fields array                            | false    |
+| params.inputFields.field_name    | <code>String</code>   | field name                              | true     |
+| params.inputFields.field_type    | <code>String</code>   | field type                              | true     |
+| params.inputFields.is_name_field | <code>Boolean</code>  | is field name                           | false    |
+
+<br>
+
+```javascript
+zWDApi
+    .share.createShare('myPool', {
+        name,
+        inputFields: [{​
+        "field_name":"Name",​
+        "field_type": "TEXT",
+        "is_name_field" : true
+        }],
+        requestUserData: true,
+        allowDownload: true,
+        password: 'pass',
+        expiredDate: "2020-09-26",
+        role: 'edit',
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+### share.createDownLoad
+
+_Create Download Link_
+
+**Returns**: <code>Object</code> - new Download Link object
+
+| Param                  | Type                 | Description                             | Required |
+| ---------------------- | -------------------- | --------------------------------------- | -------- |
+| pool                   | <code>string</code>  | name of the pool you would like, of use | true     |
+| params                 | <code>Object</code>  |                                         |          |
+| params.resourceId      | <code>String</code>  | Id of the file                          | true     |
+| params.name            | <code>String</code>  | Name of new link                        | true     |
+| params.requestUserData | <code>Boolean</code> | Request User Data                       | false    |
+| params.expiredDate     | <code>String</code>  | Expired date                            | false    |
+| params.downloadLimit   | <code>Number</code>  | count downloads                         | false    |
+
+<br>
+
+```javascript
+zWDApi.share
+    .createDownLoad('myPool', {
+        resourceId: 'fileId',
+        name: 'linkName',
+        requestUserData: true,
+        expiredDate: '2020-09-26',
+        downloadLimit: 5,
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+### share.update
+
+_Update Link_
+
+**Returns**: <code>Object</code> - updated Link object
+
+| Param                                 | Type                 | Description                             | Required |
+| ------------------------------------- | -------------------- | --------------------------------------- | -------- |
+| pool                                  | <code>string</code>  | name of the pool you would like, of use | true     |
+| params                                | <code>Object</code>  |                                         |          |
+| params.linkId                         | <code>String</code>  | link Id                                 | true     |
+| params.attributes                     | <code>Object</code>  |                                         | true     |
+| params.attributes.expiredDate         | <code>String</code>  | Expired date                            | false    |
+| params.attributes.allowDownload       | <code>Boolean</code> | download Possible                       | false    |
+| params.attributes.isPasswordProtected | <code>Boolean</code> | Request User Data                       | false    |
+| params.attributes.password            | <code>String</code>  | password                                | false    |
+
+<br>
+
+```javascript
+zWDApi.share
+    .update('myPool', {
+        attributes: {
+            allowDownload: false,
+            password: 'updatepassword1',
+            isPasswordProtected: true,
+            expiredDate: '2020-09-30',
+        },
+        linkId: 'Link id',
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+### share.delete
+
+_Delete Shared Link_
+
+**Returns**: <code>Object</code>
+
+| Param         | Type                | Description                             | Required |
+| ------------- | ------------------- | --------------------------------------- | -------- |
+| pool          | <code>string</code> | name of the pool you would like, of use | true     |
+| params        | <code>Object</code> |                                         |          |
+| params.linkId | <code>String</code> | link Id                                 | true     |
+
+<br>
+
+```javascript
+zWDApi.share
+    .delete('myPool', {
+        linkId: 'Link id',
+    })
+    .then(data => {
+        // console.log(data)
     });
 ```

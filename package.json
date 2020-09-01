@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/yamyn/zoho-workdrive-api.git"
+        "url": "git+https://github.com/yamyn/zoho-wd-pools.git"
     },
     "keywords": [
         "zoho",
@@ -19,13 +19,13 @@
     "author": "Yaroslav Mynchenko",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/yamyn/zoho-workdrive-api/issues"
+        "url": "https://github.com/yamyn/zoho-wd-pools/issues"
     },
-    "homepage": "https://github.com/yamyn/zoho-workdrive-api#readme",
+    "homepage": "https://github.com/yamyn/zoho-wd-pools#readme",
     "dependencies": {
         "axios": "0.19.2",
         "form-data": "3.0.0",
-        "lodash.get": "^4.4.2",
-        "node-cache": "^5.1.2"
+        "lodash": "^4.17.20",
+        "node-cache": "5.1.2"
     }
 }
