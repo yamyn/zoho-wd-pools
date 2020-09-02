@@ -1,6 +1,6 @@
 {
     "name": "zoho-wd-pools",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "description": "ZohoWorkDrive module, which makes communication with ZohoWorkDrive API easier, based in 'zoho-workdrive-api' and have auto set tokens mechanism",
     "main": "./lib/index.js",
     "scripts": {
@@ -25,7 +25,7 @@
     "dependencies": {
         "axios": "0.19.2",
         "form-data": "3.0.0",
-        "lodash": "^4.17.20",
+        "lodash": "4.17.20",
         "node-cache": "5.1.2"
     }
 }
