@@ -71,6 +71,14 @@ npm i zoho-wd-pools
     -   [update](#shareupdate)
     -   [delete](#sharedelete)
 
+-   [share](#share-1)
+
+    -   [list](#sharelist)
+    -   [create](#sharecreate)
+    -   [createDownLoad](#sharecreateDownLoad)
+    -   [update](#shareupdate)
+    -   [delete](#sharedelete)
+
 # Examples
 
 ## Require module
@@ -1005,6 +1013,379 @@ _Delete Shared Link_
 zWDApi.share
     .delete('myPool', {
         linkId: 'Link id',
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+## customMeta
+
+## customMeta.dataTemp
+
+### customMeta.dataTemp.list
+
+_Return info about all templates for your team_
+
+**Returns**: <code>Object[]</code> - templates array of object
+
+| Param         | Type                | Description                             | Required |
+| ------------- | ------------------- | --------------------------------------- | -------- |
+| pool          | <code>string</code> | name of the pool you would like, of use | true     |
+| params        | <code>Object</code> |                                         |          |
+| params.teamId | <code>String</code> | Zoho team`s id                          | true     |
+
+<br>
+
+```javascript
+zWDApi.customMeta.dataTemp
+    .list('myPool', {
+        teamId: 'Zoho team`s id',
+    })
+    .then(data => {
+        // console.log(data)
+        // returns data with all templates for your team
+    });
+```
+
+### customMeta.dataTemp.create
+
+_Create customData template_
+
+**Returns**: <code>Object</code> - new template object
+
+| Param              | Type                | Description                             | Required |
+| ------------------ | ------------------- | --------------------------------------- | -------- |
+| pool               | <code>string</code> | name of the pool you would like, of use | true     |
+| params             | <code>Object</code> |                                         |          |
+| params.teamId      | <code>String</code> | Id your zoho team                       | true     |
+| params.name        | <code>String</code> | Name of new template                    | true     |
+| params.description | <code>String</code> |                                         | false    |
+
+<br>
+
+```javascript
+zWDApi.customMeta.dataTemp
+    .create('myPool', {
+        teamId,
+        name,
+        description,
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+### customMeta.dataTemp.update
+
+_Update customData template_
+
+**Returns**: <code>Object</code> - updated template object
+
+| Param              | Type                | Description                             | Required |
+| ------------------ | ------------------- | --------------------------------------- | -------- |
+| pool               | <code>string</code> | name of the pool you would like, of use | true     |
+| params             | <code>Object</code> |                                         |          |
+| params.templateId  | <code>String</code> | Template id                             | true     |
+| params.name        | <code>String</code> | Name template                           | true     |
+| params.description | <code>String</code> |                                         | false    |
+
+<br>
+
+```javascript
+zWDApi.customMeta.dataTemp
+    .update('myPool', {
+        templateId,
+        name,
+        description,
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+### customMeta.dataTemp.delete
+
+_Delete customData template_
+
+**Returns**: <code>Object</code>
+
+| Param             | Type                | Description                             | Required |
+| ----------------- | ------------------- | --------------------------------------- | -------- |
+| pool              | <code>string</code> | name of the pool you would like, of use | true     |
+| params            | <code>Object</code> |                                         |          |
+| params.templateId | <code>String</code> | template Id                             | true     |
+
+<br>
+
+```javascript
+zWDApi.customMeta.dataTemp
+    .delete('myPool', {
+        templateId,
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+## customMeta.fields
+
+### customMeta.fields.list
+
+_Return info about all custom fields for your template_
+
+**Returns**: <code>Object[]</code> - fields array of object
+
+| Param             | Type                | Description                             | Required |
+| ----------------- | ------------------- | --------------------------------------- | -------- |
+| pool              | <code>string</code> | name of the pool you would like, of use | true     |
+| params            | <code>Object</code> |                                         |          |
+| params.templateId | <code>String</code> | Template id                             | true     |
+
+<br>
+
+```javascript
+zWDApi.customMeta.fields
+    .list('myPool', {
+        templateId,
+    })
+    .then(data => {
+        // console.log(data)
+        // returns data with all custom fields for your template
+    });
+```
+
+### customMeta.fields.create
+
+_Create custom field_
+
+**Returns**: <code>Object</code> - new custom field object
+
+| Param             | Type                | Description                             | Required |
+| ----------------- | ------------------- | --------------------------------------- | -------- |
+| pool              | <code>string</code> | name of the pool you would like, of use | true     |
+| params            | <code>Object</code> |                                         |          |
+| params.templateId | <code>String</code> | Template id                             | true     |
+| params.name       | <code>String</code> | Name of new custom field                | true     |
+| params.properties | <code>Object</code> |                                         | false    |
+
+<br>
+
+```javascript
+zWDApi.customMeta.fields
+    .create('myPool', {
+        name: 'c-field',
+        templateId,
+        index: 0,
+        type: 'multiline_text',
+        properties: {
+            description: `my Custom field`,
+            is_mandatory: false,
+        },
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+#### Note : _index attribute represents position of Custom Field inside Data Template._
+
+#### Other Custom Field types with
+
+supported field properties:
+
+1. text field_properties:
+
+    1. description
+    2. default_value
+    3. max_char_length
+    4. is_mandatory
+
+2. multiline_text field_properties:
+
+    1. description
+    2. is_mandatory
+    3. number field_properties:
+    4. description
+    5. default_value
+    6. min_value
+    7. max_value
+    8. is_mandatory
+
+3. datetime field_properties:
+
+    1. description
+    2. default_value - (in milli seconds)
+    3. is_mandatory
+
+4. date field_properties:
+
+    1. description
+    2. default_value - (in milli seconds)
+    3. is_mandatory
+
+5. yes_or_no field_properties:
+
+    1. description
+    2. default_value - (in boolean)
+    3. is_mandatory
+
+6. dropdown / radio / checkbox options: <JSON ARRAY format> Example: ["One","Two", "Three"] field_properties:
+
+    1. description
+    2. default_value
+    3. is_mandatory
+
+7. email field_properties:
+    1. description
+    2. is_mandatory
+
+### customMeta.fields.update
+
+_Update custom field_
+
+**Returns**: <code>Object</code> - updated custom field object
+
+| Param          | Type                | Description                             | Required |
+| -------------- | ------------------- | --------------------------------------- | -------- |
+| pool           | <code>string</code> | name of the pool you would like, of use | true     |
+| params         | <code>Object</code> |                                         |          |
+| params.fieldId | <code>String</code> | custom field id                         | true     |
+| params.name    | <code>String</code> | Name of field                           | false    |
+
+<br>
+
+```javascript
+zWDApi.customMeta.fields
+    .update('myPool', {
+        fieldId,
+        name,
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+### customMeta.fields.delete
+
+_Delete custom field_
+
+**Returns**: <code>Object</code>
+
+| Param          | Type                | Description                             | Required |
+| -------------- | ------------------- | --------------------------------------- | -------- |
+| pool           | <code>string</code> | name of the pool you would like, of use | true     |
+| params         | <code>Object</code> |                                         |          |
+| params.fieldId | <code>String</code> | custom field Id                         | true     |
+
+<br>
+
+```javascript
+zWDApi.customMeta.fields
+    .delete('myPool', {
+        fieldId: 'field id',
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+## customMeta.meta
+
+### customMeta.meta.create
+
+_Create meta data for file_
+
+**Returns**: <code>Object</code> - new meta object
+
+| Param                             | Type                | Description                             | Required |
+| --------------------------------- | ------------------- | --------------------------------------- | -------- |
+| pool                              | <code>string</code> | name of the pool you would like, of use | true     |
+| params                            | <code>Object</code> |                                         |          |
+| params.templateId                 | <code>String</code> | Template id                             | true     |
+| params.resourceId                 | <code>String</code> | file id                                 | true     |
+| params.customData                 | <code>Object</code> |                                         | true     |
+| params.customData.custom_field_id | <code>String</code> | custom field id                         | true     |
+| params.customData.value           | <code>String</code> | saved data                              | true     |
+
+<br>
+
+```javascript
+zWDApi.customMeta.meta
+    .create('myPool', {
+        templateId,
+        resourceId,
+        customData: [
+            {
+                custom_field_id,
+                value,
+            },
+            {
+                custom_field_id,
+                value,
+            },
+        ],
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+### customMeta.meta.update
+
+_Update meta data_
+
+**Returns**: <code>Object</code> - updated meta object
+
+| Param                             | Type                | Description                             | Required |
+| --------------------------------- | ------------------- | --------------------------------------- | -------- |
+| pool                              | <code>string</code> | name of the pool you would like, of use | true     |
+| params                            | <code>Object</code> |                                         |          |
+| params.metadataId                 | <code>String</code> | file metadataId id                      | true     |
+| params.customData                 | <code>Object</code> |                                         | true     |
+| params.customData.custom_field_id | <code>String</code> | custom field id                         | true     |
+| params.customData.value           | <code>String</code> | saved data                              | true     |
+
+<br>
+
+```javascript
+zWDApi.customMeta.meta
+    .update('myPool', {
+        metadataId,
+        customData: [
+            {
+                custom_field_id,
+                value,
+            },
+            {
+                custom_field_id,
+                value,
+            },
+        ],
+    })
+    .then(data => {
+        // console.log(data)
+    });
+```
+
+### customMeta.meta.delete
+
+_Delete file meta data_
+
+**Returns**: <code>Object</code>
+
+| Param             | Type                | Description                             | Required |
+| ----------------- | ------------------- | --------------------------------------- | -------- |
+| pool              | <code>string</code> | name of the pool you would like, of use | true     |
+| params            | <code>Object</code> |                                         |          |
+| params.metadataId | <code>String</code> | file metadataId id                      | true     |
+
+<br>
+
+```javascript
+zWDApi.customMeta.meta
+    .delete('myPool', {
+        metadataId,
     })
     .then(data => {
         // console.log(data)
