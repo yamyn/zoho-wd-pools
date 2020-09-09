@@ -71,13 +71,22 @@ npm i zoho-wd-pools
     -   [update](#shareupdate)
     -   [delete](#sharedelete)
 
--   [share](#share-1)
-
-    -   [list](#sharelist)
-    -   [create](#sharecreate)
-    -   [createDownLoad](#sharecreateDownLoad)
-    -   [update](#shareupdate)
-    -   [delete](#sharedelete)
+-   [customMeta](#customMeta-1)
+-   [customMeta.dataTemp](#customMetacustomMetadataTemp)
+    -   [list](#customMetacustomMetadataTemplist)
+    -   [create](##customMetacustomMetadataTempcreate)
+    -   [update](##customMetacustomMetadataTempupdate)
+    -   [delete](##customMetacustomMetadataTempdelete)
+-   [customMeta.dataTemp](#customMetacustomMetadataTemp)
+    -   [list](#customMetacustomMetadataTemplist)
+    -   [create](##customMetacustomMetadataTempcreate)
+    -   [update](##customMetacustomMetadataTempupdate)
+    -   [delete](##customMetacustomMetadataTempdelete)
+-   [customMeta.dataTemp](#customMetacustomMetadataTemp)
+    -   [list](#customMetacustomMetadataTemplist)
+    -   [create](##customMetacustomMetadataTempcreate)
+    -   [update](##customMetacustomMetadataTempupdate)
+    -   [delete](##customMetacustomMetadataTempdelete)
 
 # Examples
 
