@@ -93,7 +93,8 @@ npm i zoho-wd-pools
 ## Require module
 
 ```javascript
-const zWDApi = require('zoho-wd-pools').getInstance();
+const ZohoWorkDriveApi = require('zoho-wd-pools');
+const ZWDApi = new ZohoWorkDriveApi(options);
 
 ZWDApi.addConection('myPool', {
     clientId,
